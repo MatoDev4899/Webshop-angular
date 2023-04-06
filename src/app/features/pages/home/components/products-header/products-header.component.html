@@ -1,0 +1,35 @@
+<mat-card class="mb-4">
+  <div class="flex justify-between">
+    <div>
+      <button mat-button [mat-menu-trigger-for]="sortByMenu">
+        Sort by {{ sort }}
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #sortByMenu="matMenu">
+        <button (click)="onSortUpdate('desc')" mat-menu-item>desc</button>
+        <button (click)="onSortUpdate('asc')" mat-menu-item>asc</button>
+      </mat-menu>
+    </div>
+    <div class="flex items-center">
+      <div>
+        <button mat-button [mat-menu-trigger-for]="menu">
+          Show {{ itemsShowCount }}
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <ng-container *ngFor="let count of counts">
+            <button mat-menu-item (click)="onItemsUpdate(count)">
+              {{ count }}
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
+      <button
+        *ngFor="let button of columnButtons"
+        (click)="onColumnsUpdated(button.columns)"
+      >
+        <mat-icon>{{ button.icon }}</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>
